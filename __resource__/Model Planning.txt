@@ -1,0 +1,62 @@
+# Product 
+    #ProductCategory
+    name = CharField(max_length=150)
+    status = BooleanField()
+
+name = CharField(max_length=150)
+product_category = FK(ProductCategory,delete)
+price = decimal
+description = textField
+stock = IntergerField
+cover_img= ImageField
+status = BooleanField()
+    
+
+## ProductIMages
+product =FK(Product,delete)
+images = ImageField()
+
+
+
+#CART
+#CART_class
+user = FK(User,delete)
+product = FK(Product,delete)
+quantity = IntergerField(default=1)
+
+
+
+#Orders
+Order class
+User = FK(User,delete)
+date_time = DateTimeField()
+name = CharField(max_length=150)
+address = textField()
+payment = BooleanField(default = False )
+
+
+# Order Details
+Order = FK(Orders,delete)
+product = FK(Product, delete)
+quantity = IntergerField()
+product_price = decimal()
+
+
+
+#User Profile
+UserProfile class
+user = FK(User,delete) - Onetoone relation
+address = textField(null=True,blank=True)
+mobile = CharField(max_length=15,null=TRUE,blank=true)
+profile_picture = ImageField(null=TRUE,blank=true)
+
+
+
+#payment
+Payment class
+Order =FK(order,delete)
+payment_status = CharField(max_length=255)
+payment_id= CharField(max_length=255)
+request_id= CharField(max_length=255)
+payment_method = CharField(max_length=255)
+
