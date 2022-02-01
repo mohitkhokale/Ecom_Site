@@ -16,7 +16,6 @@ class HomePage(View):
             'navigationProductCategory':navigationProductCategory,
             'productCategories':productCategories,
         }
-
         return render(request,"home-page.html",context)
 
 class ProductListing(View):
