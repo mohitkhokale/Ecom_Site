@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'payment',
     'product',
     'user_profile',
+    'dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
