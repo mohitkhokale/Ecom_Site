@@ -165,14 +165,9 @@
                             -->
                 <div class="header__top__right__auth">
                   {% if request.user.is_authenticated %}
-
-                  <a href="{% url 'logout' %}"
-                    ><i class="fa fa-user"></i>{{user.get_username}}, Logout</a
-                  >
+          <a href="{% url 'UserProfile' %}"> <i class="fa fa-user"></i></a> <a href="{% url 'logout' %}">Logout</a>
                   {% else %}
-                  <a href="{% url 'login' %}"
-                    ><i class="fa fa-user"></i>Login</a
-                  >
+                  <a href="{% url 'login' %}"><i class="fa fa-user"></i>Login</a>
                   {% endif %}
                 </div>
               </div>

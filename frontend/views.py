@@ -1,6 +1,3 @@
-from itertools import product
-from re import T, template
-import re
 from django.shortcuts import render
 from django.views import View
 from product.models import ProductCategory,Product,ProductImages
