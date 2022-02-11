@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 # Create your views here.
-
 from django.views import View
 from cart.models import Cart
 from product.models import ProductCategory ,Product

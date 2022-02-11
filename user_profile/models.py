@@ -12,4 +12,4 @@ class UserProfile(models.Model):
     about = models.TextField(max_length=255,null=True,blank=True)
     
     def __str__(self):  
-        return str(self.user.first_name)
+        return str(self.user)
