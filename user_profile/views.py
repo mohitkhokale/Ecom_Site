@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import redirect, render
 from django.views import View
 from product.models import ProductCategory,Product
@@ -21,8 +22,8 @@ class UserProfiles(View):
         data,created = User.objects.get_or_create(id=request.user.id)
         data.first_name = request.POST.get('first_name')
         data.last_name = request.POST.get('last_name')
-        
         userprofile_data,created = UserProfile.objects.get_or_create(user_id=request.user.id) 
+        
         userprofile_data.address = request.POST.get('address')
         userprofile_data.about = request.POST.get('about')
         data.save()

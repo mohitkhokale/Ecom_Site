@@ -1,0 +1,99 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Blog</h2>
+                    <div class="breadcrumb__option">
+                        <a href="/">Home</a>
+                        <span>Blog</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Blog Section Begin -->
+<section class="blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-5">
+                <div class="blog__sidebar">
+                    <!-- <div class="blog__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <h4>Categories</h4>
+                        <ul>
+                            {% for category in blogcategory %}
+                            <li><a href="{% url 'blog' blog_id=category.id %}">{{category}}</a>
+                            </li>
+                            {% endfor %}
+
+                        </ul>
+                    </div> -->
+                    <div class="blog__sidebar__item">
+                        <h4>Recent News</h4>
+                          {% for recent in recent_news %}
+                        <div class="blog__sidebar__recent">
+                            <a href="{% url 'blogdetails' blog_id=recent.id %}" class="blog__sidebar__recent__item">
+                                <div class="blog__sidebar__recent__item__pic">
+                                </div>
+                                <img style="width: 10%; height:20%" src="{{recent.blog_img.url}}" alt=""/>
+                                <div class="blog__sidebar__recent__item__text">
+                                    <h6>{{recent.blog_name}}</h6>
+                                    <span>{{recent.date}}</span>
+                                </div>
+                            </a>
+                            
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        
+            <div class="col-lg-8 col-md-7">
+                <div class="row">
+                    {% for bloger in blogs %}
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="blog__item">
+                            <div class="blog__item__pic">
+                                <img style="
+                                max-width: 4%;
+                                min-width: 50%;
+                            " src="{{bloger.blog_img.url }}" alt="">
+                            </div>
+
+                            {{blog.date}}
+                            <div class="blog__item__text">
+                                <ul>
+                                    <li><i class="fa fa-calendar-o"></i>{{bloger.date}}</li>
+                                </ul>
+                                <h5><a href="{% url 'blogdetails' blog_id=bloger.id %}">{{bloger.blog_name}}</a></h5>
+                                <p>{{bloger.description}}</p>
+                                <a href="{% url 'blogdetails' blog_id=bloger.id %}" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->
+
+{% endblock content %}

@@ -185,7 +185,7 @@
           <div class="col-lg-6">
             <nav class="header__menu">
               <ul>
-                <li class="active"><a href="/">Home</a></li>
+                <li class=""><a href="/">Home</a></li>
                 <li>
                   <a href="javascript:void(0)">Categories</a>
                   <ul class="header__menu__dropdown">
@@ -199,7 +199,7 @@
                     {% endfor %}
                   </ul>
                 </li>
-                <li><a href="./blog.html">Blog</a></li>
+                <li><a href="{% url 'blog' %}">Blog</a></li>
                 <li><a href="./contact.html">Contact</a></li>
               </ul>
             </nav>

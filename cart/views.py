@@ -40,6 +40,7 @@ class MyCart(View):
     def get(self,request):
         navigationProductCategory = ProductCategory.objects.filter(status=True)
         carts = Cart.objects.filter(user=request.user)
+        
         cartData={}
         subtotal = 0
         shippingCost = 50
@@ -72,7 +73,7 @@ class MyCart(View):
     def post(self,request):
         cart_id_list= request.POST.getlist('cart_id')
         quantity_list = request.POST.getlist('quantity')
-
+          
         for index,cart_id in enumerate(cart_id_list):
             # print(index,cart_id,quantity_list[index])
             try:
