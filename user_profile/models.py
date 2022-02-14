@@ -9,9 +9,9 @@ class UserProfile(models.Model):
     address = models.TextField(null=True,blank=True)
     mobile = models.CharField(max_length=10,null=True,blank=True)
     dob = models.DateField(null=True,blank=True)
-    user_img = models.ImageField()
+    user_img = models.ImageField(upload_to='CustomerProfilePic/',default='CustomerProfilePic/default.jpg')
     about = models.TextField(max_length=255,null=True,blank=True)
-    # first_name = models.TextField(null=True,blank=True)
-    # last_name = models.TextField(null=True,blank=True)
+    first_name = models.TextField(null=True,blank=True)
+    last_name = models.TextField(null=True,blank=True)
     def __str__(self):  
         return str(self.user)

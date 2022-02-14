@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 <link href="{% static 'css/user-profile.css' %}" rel="stylesheet" type="text/css">
-<style>
-
-
-</style>
-
 <body>
+  {% if request.user.is_authenticated   %}
+
   <div class="main-content">
     <!-- Top navbar -->
     <!--  -->
@@ -27,6 +25,7 @@
     </div>
   </div>
   <!-- Page content -->
+
   <form method="post" enctype="multipart/form-data" action="{% url 'UserProfile' %}">
     {% csrf_token %}
     <div class="container-fluid mt--7">
@@ -37,18 +36,17 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                    <a href="#">
-                    <img data-imgbigurl=" {{user.UserProfile.user_img.url}}" src="{{user.UserProfile.user_img.url}}"
+                  <img data-imgbigurl=" {{user.UserProfile.user_img.url | default_if_none:'#' }}" src="{{user.UserProfile.user_img.url | default_if_none:'#' }}"
                       alt="" /> </a>
                 </div>
+                <br><br><br><br><br><br>Select Image: <input type="file" name="user_img">
               </div>
+
             </div>
 
             <div class="card-body pt-0 pt-md-4">
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
+        
+            
               <div class="text-center">
                 <h3>
                   {{user.first_name}} {{user.last_name}}<span class="font-weight-light"> </span>
@@ -140,7 +138,13 @@
         </div>
       </div>
   </form>
+
   </div>
   </div>
+  {% else %}
+  <h3> <center>Please <a href="{% url 'login' %}">Login</a> to add this product in cart </center> </h3><br><br><br><br>
+  {% endif %}
 </body>
+
+
 {% endblock content %}
