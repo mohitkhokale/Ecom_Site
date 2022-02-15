@@ -26,7 +26,7 @@
   </div>
   <!-- Page content -->
 
-  <form method="post" enctype="multipart/form-data" action="{% url 'UserProfile' %}">
+  <form enctype="multipart/form-data" method="POST" action="{% url 'UserProfile' %}">
     {% csrf_token %}
     <div class="container-fluid mt--7">
       <div class="row">
@@ -36,11 +36,12 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                    <a href="#">
-                  <img data-imgbigurl=" {{user.UserProfile.user_img.url | default_if_none:'#' }}" src="{{user.UserProfile.user_img.url | default_if_none:'#' }}"
+                      
+                  <img src="{{ user.UserProfile.user_img.url  }}"
                       alt="" /> </a>
-                </div>
-                <br><br><br><br><br><br>Select Image: <input type="file" name="user_img">
-              </div>
+                    </div>
+                    <br><br><br><br><br><br>Select Imagess: <input type="file" name="user_img" >
+               </div>
 
             </div>
 
