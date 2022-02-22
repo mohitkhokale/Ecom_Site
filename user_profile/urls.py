@@ -2,7 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    
-    path('user-profile/',views.UserProfiles.as_view(),name="UserProfile"),
-    
+    path('update-user-profile/<int:pk>',views.UpdateUserProfile,name="UpdateUserProfile"),  
 ]

@@ -4,8 +4,10 @@ from django.db.models import fields
 from .models import UserProfile
 
 """ MODEL FORM- TO WORK WITH DB DATA """
-class userupdateform(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = '__all__'
-        # fields=['name','description']
+        # fields=['first_name','last_name']
+
+
