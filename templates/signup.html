@@ -1,17 +1,45 @@
-<h2>Sign up Form</h2>
-<form method="post">
-  {% csrf_token %}
-  {% for field in form %}
-    <p>
-      {{ field.label_tag }}<br>
-      {{ field }}
-      {% if field.help_text %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<Style>
+
+  body{ 
+    background-color:rgba(70, 66, 66, 0.13);
+   }
+   .checkout__input input{
+     color:#000 !important;
+   }
+   body > div.container > form > div > div > div:nth-child(3) > div:nth-child(3) > div > a{
+     color:#000 !important;
+   }
+   #user_img-clear_id{
+     width:4%;
+     
+   }
+  </Style>
+<div class="container">
+
+  <div class="row">
+    <form method="post" enctype="multipart/form-data">
+      <h2>Sign up Forms</h2>
+      {% csrf_token %}
+      {% for field in form %}
+      <p>
+
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
         <small style="color: grey">{{ field.help_text }}</small>
-      {% endif %}
-      {% for error in field.errors %}
-        <p style="color: red">{{ error }}</p>
+        {% endif %}
+        {% for error in field.errors %}
+      <p style="color: red">{{ error }}</p>
       {% endfor %}
-    </p>
-  {% endfor %}
-  <button type="submit">Sign up</button>
-</form>
+      </p>
+
+      {% endfor %}
+      <button class="btn-primary center" value="submit" type="submit">Sign up</button>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

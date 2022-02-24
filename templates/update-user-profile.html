@@ -1,12 +1,77 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %} 
-    {{forms.as_table}}
-  <input type="submit" name="submit" value="submit" />
-  </form>
+<Style>
+
+body{ 
+  background-color:rgba(70, 66, 66, 0.13);
+ }
+ .checkout__input input{
+   color:#000 !important;
+ }
+ body > div.container > form > div > div > div:nth-child(3) > div:nth-child(3) > div > a{
+   color:#000 !important;
+ }
+ #user_img-clear_id{
+   width:4%;
+   
+ }
+</Style>
+
+<div class="container">
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-lg-8 col-md-6">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="checkout__input">
+              <p>First Name<span>*</span></p>
+              {{forms.first_name}}
+
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="checkout__input">
+              <p>Last Name<span>*</span></p>
+              {{forms.last_name}}
+
+             </div>
+          </div>
+        </div>
+        <div class="checkout__input">
+          <p>Address<span>*</span></p>
+          {{forms.address}}
   
-  {{form}}
-  {% endblock content %}
-  
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="checkout__input">
+              <p>Phone<span>*</span></p>
+              {{forms.mobile}}
+             </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="checkout__input">
+              <p>Email<span>*</span></p>
+              {{forms.email}}
+             </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="checkout__input">
+              <p>Profile Picture<span>*</span></p>
+              {{forms.user_img}}
+             </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+<input type="submit" class="btn-primary center" value="submit" name="submit" value="submit" />
+</form>
+</div>
+
+{% endblock content %}

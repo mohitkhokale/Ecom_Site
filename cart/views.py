@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 # Create your views here.
 from django.views import View
-from cart.models import Cart
+from cart.models import Cart, Couponcode
 from product.models import ProductCategory ,Product
 
 class AddToCart(View):
@@ -40,13 +40,19 @@ class MyCart(View):
     def get(self,request):
         navigationProductCategory = ProductCategory.objects.filter(status=True)
         carts = Cart.objects.filter(user=request.user)
-        
+
+        # couponcode = Couponcode.objects.get()
+        # coupon = request.POST.get('coupon')
+        # print("AAHAAAA",coupon)
+        # if coupon == 'disc50':
+        #     print("***APPLIED ***",couponcode.amount)
+
         cartData={}
         subtotal = 0
         shippingCost = 50
         total = 0 
         for key,cart in enumerate(carts):
-            productTotal = int(cart.product.price)* int(cart.quantity)
+            productTotal = int(cart.product.price)* int(cart.quantity)  
             subtotal +=  productTotal
             
             cartData[key]={
@@ -73,7 +79,8 @@ class MyCart(View):
     def post(self,request):
         cart_id_list= request.POST.getlist('cart_id')
         quantity_list = request.POST.getlist('quantity')
-          
+       
+    
         for index,cart_id in enumerate(cart_id_list):
             # print(index,cart_id,quantity_list[index])
             try:
@@ -94,26 +101,42 @@ class CheckOut(View):
     def get(self,request):
         navigationProductCategory = ProductCategory.objects.filter(status=True)
         carts = Cart.objects.filter(user=request.user)
+
+        couponcode = Couponcode.objects.get()
+        coupon = request.GET.get('coupon')       
+ 
         cartData={}
         subtotal = 0
         shippingCost = 50
         total = 0 
         for key,cart in enumerate(carts):
-            productTotal = int(cart.product.price)* int(cart.quantity)
+            productTotal = int(cart.product.price)* int(cart.quantity) 
             subtotal +=  productTotal
-            
-            cartData[key]={
-                'product_name':cart.product.name,
-                "product_total":productTotal
-            }
         
-        total = subtotal + shippingCost
+        cartData[key]={
+            'product_name':cart.product.name,
+            "product_total":productTotal
+        }
+        if coupon == 'disc50':
+            total = subtotal + shippingCost - couponcode.amount
+            context = {
+                "navigationProductCategory":navigationProductCategory,
+                'carts':list(cartData.values()),
+                'subtotal':subtotal,
+                'shippingCost':shippingCost,
+                'couponcode':couponcode.amount,
+                'total':total
+            }
+        else:
+            total = subtotal + shippingCost
 
-        context = {
-            "navigationProductCategory":navigationProductCategory,
-            'carts':list(cartData.values()),
-            'subtotal':subtotal,
-            'shippingCost':shippingCost,
-            'total':total
-         }
+            context = {
+                "navigationProductCategory":navigationProductCategory,
+                'carts':list(cartData.values()),
+                'subtotal':subtotal,
+                'shippingCost':shippingCost,
+                'couponcode':"0",
+                'total':total
+            }
         return render(request,self.template_name,context)
+     

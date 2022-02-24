@@ -42,10 +42,11 @@ def logout(request):
 ''' USER REGISTRATION WITH PROFILE '''
 
 def home_view(request):
-    return render(request, 'home-page.html')
+    return render(request,'home-page.html')
 
 def signup_view(request):
-    form = SignUpForm(request.POST)
+
+    form = SignUpForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         user = form.save()
         user.refresh_from_db()
@@ -55,6 +56,7 @@ def signup_view(request):
         user.UserProfile.about = form.cleaned_data.get('about')
         user.UserProfile.dob = form.cleaned_data.get('dob')
         user.UserProfile.address = form.cleaned_data.get('address')
+        user.UserProfile.user_img = form.cleaned_data.get('user_img')
         user.save()
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password1')
@@ -63,7 +65,7 @@ def signup_view(request):
         return redirect('home')
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+        return render(request, 'signup.html', {'form': form})
 
 
 # def register(request):

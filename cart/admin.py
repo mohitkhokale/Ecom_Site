@@ -1,6 +1,6 @@
 from re import search
 from django.contrib import admin
-from .models import Cart
+from .models import Cart, Couponcode
 # Register your models here.
 
 
@@ -10,3 +10,11 @@ class CartAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Cart,CartAdmin)
+
+
+
+class CouponcodeAdmin(admin.ModelAdmin):
+    list_display = ['id', 'coupon_name', 'amount','status',]
+ 
+# Register your models here.
+admin.site.register(Couponcode,CouponcodeAdmin)

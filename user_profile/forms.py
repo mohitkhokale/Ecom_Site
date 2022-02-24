@@ -7,7 +7,10 @@ from .models import UserProfile
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = '__all__'
-        # fields=['first_name','last_name']
-
-
+        fields=['first_name','last_name','address','mobile','dob','about','user_img','email']
+        
+        def __init__(self, *args, **kwargs):
+            super(UserProfileForm, self).__init__(*args, **kwargs)
+            for visible in self.visible_fields():
+                visible.field.widget.attrs['class'] = 'form-control'
+ 

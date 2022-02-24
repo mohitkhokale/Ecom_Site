@@ -13,3 +13,9 @@ class Cart(models.Model):
         """Example mohit samsung s21 FE Quantity:1"""
         return f'{self.user} {self.product} - {self.quantity}'
 
+class Couponcode(models.Model):
+    coupon_name = models.CharField(max_length=255, blank=True,null=True)
+    amount = models.IntegerField(null=True, blank=True)
+    status = models.BooleanField(default=True)
+    def __str__(self):
+        return self.coupon_name

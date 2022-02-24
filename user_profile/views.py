@@ -6,23 +6,29 @@ from user_profile.models import UserProfile
 from django.contrib.auth.models import User      
 
 def UpdateUserProfile(request,pk=None):
-
-        user = User.objects.get(id=pk)
-        print('************',user.id)
-        if request.user.is_authenticated():
+    try:
+        user = UserProfile.objects.get(pk=pk)
+        if request.user.id == user.id:
+            profile_id = UserProfile.objects.get(pk=pk)
+            user_img = UserProfile.objects.filter(pk=pk)
             navigationProductCategory = ProductCategory.objects.all()
-            Product_Category = UserProfile.objects.get(pk=id)
-            print(Product_Category)
-            form_class = UserProfileForm(request.POST or None, request.FILES or None,instance=Product_Category)
+        
+            form_class = UserProfileForm(request.POST or None, request.FILES or None,instance=profile_id)
             if form_class.is_valid():
                 form_class.save()   
             context ={
                 'navigationProductCategory':navigationProductCategory ,
-                'profile_id':Product_Category,
+                'profile_id':profile_id,
+                'user_img':user_img,
                 'forms':form_class,
             }
             
             return render(request,"update-user-profile.html",context)
+        else:
+            return render(request,"home-page.html", )
+
+    except UserProfile.DoesNotExist:
+        return render(request,"home-page.html", )
 
 
 # class UserProfilesView(View):

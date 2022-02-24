@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from product.models import ProductCategory,Product,ProductImages
+from user_profile.models import UserProfile
 
 
 class HomePage(View):
@@ -8,7 +9,6 @@ class HomePage(View):
         navigationProductCategory = ProductCategory.objects.filter(status=True)
         productCategories = ProductCategory.objects.filter(status=True).order_by('-id')[:3]
         print(productCategories)
-
         context ={ 
             'navigationProductCategory':navigationProductCategory,
             'productCategories':productCategories,
