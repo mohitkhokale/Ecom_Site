@@ -75,3 +75,5 @@ class ProductDetails(View):
         return render(request,self.template_name,context)
 
    
+class Checkout(View):
+    pass

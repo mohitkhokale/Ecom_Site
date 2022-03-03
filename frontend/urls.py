@@ -7,4 +7,5 @@ urlpatterns = [
     path('ProductListing/',views.ProductListing.as_view(),name="ProductListing"),
     path('ProductListing/<int:product_category_id>',views.ProductListing.as_view(),name="ProductListing"),
     path('product-details/<int:product_id>',views.ProductDetails.as_view(),name="ProductDetails"),
+    path('checkout/',views.Checkout.as_view(),name="Checkout"),
 ]

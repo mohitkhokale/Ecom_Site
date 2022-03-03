@@ -1,3 +1,5 @@
+from re import M
+import django
 from random import choices
 from django.db import models
 from django.contrib.auth.models import User
@@ -16,11 +18,12 @@ class Order(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     address = models.TextField()
-    date_time = models.DateTimeField()
-    payment_status = models.BooleanField(default = False)
+    date_time = models.DateTimeField(default=django.utils.timezone.now)
     order_status = models.CharField(max_length=255,choices = order_status_choices, default='pending')
+    payment_status = models.BooleanField(default = False)
+    razorpay_order_id = models.CharField(max_length=255, blank=True, null=True)
     def __str__(self):
-        return str(self.id)
+        return str(self.user)
 
 class OrderDetail(models.Model):
     """Order Details"""
@@ -30,4 +33,17 @@ class OrderDetail(models.Model):
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return str(self.name)
+        return str(self.order)
+
+class Payment(models.Model):
+    order = models.ForeignKey(Order,on_delete=models.CASCADE)
+    payment_id = models.CharField(max_length=255,null=True,blank=True)
+    payment_status = models.CharField(max_length=255,null=True,blank=True)
+    payment_method = models.CharField(max_length=255,null=True,blank=True)
+    created_at = models.CharField(max_length=255,null=True,blank=True)
+    amount = models.CharField(max_length=255,null=True,blank=True)
+    
+
+    
+    def __str__(self):
+        return str(self.transaction_id)
